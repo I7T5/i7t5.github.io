@@ -9,6 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.10",
     "astro": "^5.1.1"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.19",
+    "@unocss/preset-icons": "^0.65.2",
+    "@unocss/preset-uno": "^0.65.2",
+    "@unocss/reset": "^0.65.2",
+    "unocss": "^0.65.2"
   }
 }
