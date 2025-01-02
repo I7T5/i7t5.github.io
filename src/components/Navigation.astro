@@ -1,19 +1,27 @@
 ---
+import NavLink from "./NavLink.astro"
 ---
-<div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-</div>
+<!-- <div class="hamburger">
+  <span class="line"></span>
+  <span class="line"></span>
+  <span class="line"></span>
+</div> -->
+
+<nav>
+  <!-- <NavLink content="Home" href="/" /> -->
+  <NavLink content="it" href="/" />
+  <NavLink content="Blog" href="/blog/" />
+  <NavLink content="Projects" href="/projects/" />
+<nav>
 
 
-<style>
+<!-- <style>
 .nav-links {
   width: 100%;
   top: 5rem;
   left: 48px;
   background-color: #ff9776;
-  display: none;
+  /* display: none; */
   margin: 0;
 }
 
@@ -31,7 +39,7 @@ a:hover, a:focus {
   background-color: #ff9776;
 }
 
-.expanded {
+/* .expanded {
   display: unset;
-}
-</style>
+} */
+</style> -->

@@ -1,10 +1,42 @@
 ---
+import Navigation from "../components/Navigation.astro";
+import Tag from "../components/Tag.astro"
+import Title from "../components/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const pageTitle = "Home";
+const pageTitle = "About";
+
+const me = {
+  name: "I7T5",
+  hobbies: ["coding", "math", "reading", "photography"],
+};
+
+const skills = {
+  programmingLanguages: ["Python", "Java", "JavaScript", "SQL", "Swift", "R", "C"], 
+  tools: ["Git", "GitHub", "HTML/CSS", "Linux", "Jupyter Notebook", "Xcode", "VS Code", "Intellij IDEA"],
+  librariesAndPackages: ["scikit-learn", "matplotlib", "numpy", "JUnit"],
+  languages: ["English", "Chinese"]
+}
+
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-	<h2>Subtitle</h2>
+<BaseLayout>
+	<Title>Ina Tang</Title>
+	#college-student #coder #wanna-be-designer
+  <!-- TODO: put an animation or game here -->
+
+  <!-- <Navigation /> -->
+  <pre>
+    <code class="text-secondary">
+> <span class="text-red">ls</span>
+<a class="hover:text-blue transition" href="/blog/">/blog</a>
+<a class="hover:text-blue transition" href="/projects/">/projects</a>
+  </code>
+
+  </pre>
+
+
+
+
 
 </BaseLayout>

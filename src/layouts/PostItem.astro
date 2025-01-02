@@ -1,5 +1,16 @@
 ---
-const { url, title } = Astro.props
+import { undefined } from "astro:schema";
+import Tag from "../components/Tag.astro";
+const { post } = Astro.props;
+const postDate = post.data.pubDate.toLocaleDateString(undefined, {
+    // TODO: incorporate year into blog post listmap
+    month: 'short',
+    day: 'numeric',
+  });
 ---
 
-<li><a href={url}>{title}</a></li>
+<li class="py-1">
+  <a class="hover:italic" href={`/posts/${post.id}`}>{post.data.title}</a>
+  <span class="text-gray-4"> · {postDate}</span>
+  <div class="text-gray-2">{post.data.tags.map((tag: any) => <Tag tag={tag} />)}</div>
+</li>

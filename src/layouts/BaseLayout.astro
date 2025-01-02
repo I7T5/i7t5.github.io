@@ -9,19 +9,18 @@ const { pageTitle } = Astro.props;
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
 	</head>
-	<body>
+	<body class="font-sans max-w-xl px-2 mx-auto">
 		<Header />
-		<h1>{pageTitle}</h1>
-        <slot />
+      <slot />
 		<Footer />
-		<script>
+		<!-- <script>
 			document.querySelector('.hamburger')?.addEventListener('click', () => {
 			  document.querySelector('.nav-links')?.classList.toggle('expanded');
 			});
-		  </script>
+		  </script> -->
 	</body>
 </html>

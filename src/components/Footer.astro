@@ -1,9 +1,25 @@
 ---
-import Social from './Social.astro';
+import Social from "./Social.astro";
+const isHomepage = Astro.url.pathname == "/";
+const destinations = ['/blog/', '/projects/'].filter(dest => Astro.url.pathname != dest);
+
 ---
 
-<footer>
-    <Social platform="twitter" username="astrodotbuild" />
-    <Social platform="github" username="withastro" />
-    <Social platform="youtube" username="astrodotbuild" />
+<footer class="mt-4 mb-12">
+  {
+    !isHomepage && (
+      <div class="font-mono text-secondary">
+        <span class="group">
+          <span>> </span>
+          <a class="hover:text-red transition duration-300" href="/" title="Go to homepage">cd</a>
+          <!-- the following should be navlinks -->
+          <!-- would be nice if we can get rid of appear on hover ITSELF for the following. display won't work well with transition -->
+          {destinations.map((dest: any) => <a class="opacity-0 group-hover:opacity-100 block hover:text-blue transition-all duration-300" href={dest}>{dest.substring(0, dest.length-1)}</a>)}
+        </span>
+      </div>
+    )
+  }
+  <Social platform="twitter" username="astrodotbuild" />
+  <Social platform="github" username="withastro" />
+  <Social platform="youtube" username="astrodotbuild" />
 </footer>
