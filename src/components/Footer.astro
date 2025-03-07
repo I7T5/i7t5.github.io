@@ -1,14 +1,13 @@
 ---
-import Social from "./Social.astro";
 const isHomepage = Astro.url.pathname == "/";
 const destinations = ['/blog/', '/projects/', '/tags/'].filter(dest => Astro.url.pathname != dest);
 
 ---
 
-<footer class="mt-4 mb-12">
+<footer class="mt-4">
   {
     !isHomepage && (
-      <div class="font-mono text-secondary">
+      <div class="text-secondary font-mono">
         <span class="group">
           <span>&#x003E </span>
           <a class="text-red xl:text-secondary xl:hover:text-red transition duration-300" href="/" title="Go to homepage">cd</a>
@@ -19,5 +18,4 @@ const destinations = ['/blog/', '/projects/', '/tags/'].filter(dest => Astro.url
       </div>
     )
   }
-  <!-- <Social platform="github" username="i7t5" /> -->
 </footer>

@@ -2,51 +2,27 @@
 import Links from "../components/Links.astro";
 import Title from "../components/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const pageTitle = "About";
-
-const me = {
-  name: "I7T5",
-  hobbies: ["coding", "math", "reading", "photography"],
-};
-
-const skills = {
-  programmingLanguages: [
-    "Python",
-    "Java",
-    "JavaScript",
-    "SQL",
-    "Swift",
-    "R",
-    "C",
-  ],
-  tools: [
-    "Git",
-    "GitHub",
-    "HTML/CSS",
-    "Linux",
-    "Jupyter Notebook",
-    "Xcode",
-    "VS Code",
-    "Intellij IDEA",
-  ],
-  librariesAndPackages: ["scikit-learn", "matplotlib", "numpy", "JUnit"],
-  languages: ["English", "Chinese"],
-};
 ---
 
 <BaseLayout>
   <Title>Ina Tang</Title>
-  <p class="text-secondary mb-2.5"> #mathmatician #coder #wanna-be-designer #college-student</p>
-  <!-- TODO: put an animation/interaction/game here -->
+  <p class="text-secondary mb-3"> #mathmatician #coder #wanna-be-designer #college-student</p>
+  <!-- TODO: make the animation/interaction/game here more fun -->
+  <!-- maybe loop display my collection of quotes -->
+  <div class="h-12 text-gray-4 font-mono">
+    <span class="typed-text">
+      <span class="typing-cursor"></span>
+    </span>
+  </div>
 
-  <p class="">Hi! I'm Ina (Yina) Tang from Shanghai, China.</p>
-  <p class="mt-0.5">
+
+  <p>Hi! I'm Ina (Yina) Tang from Shanghai, China.</p>
+  <p class="mt-1">
     I enjoy mathematics and coding (yes, even in my spare time), as well as philosophy and theology.
     I am currently reading the <i>Pensées</i> and <i>Anne of Green Gables</i>. My goal this year is to finish <i>The Simarilion</i>...
   </p>
 
-  <pre><code class="text-secondary">
+  <pre><code class="text-secondary font-mono">
 &#x003E <span class="text-red">ls</span> <!-- &#x003E == '>'; for better highlighting in IDEs-->
 <a class="hover:text-blue transition" href="/blog/">blog</a>
 <a class="hover:text-blue transition" href="/projects/">projects</a>
@@ -54,8 +30,63 @@ const skills = {
   </code></pre> <!-- DON'T LINT THIS for the margin between the social... -->
 
   <Links />
+  <script>
+function typeWriter() {
 
-  <!-- CV/RESUMÉ GITHUB GOODREADS (underline) -->
-    <!-- <Social platform="github" username="i7t5" /> -->
+  if (!document.querySelector(".typed-text")) return; 
 
+  const typedTextSpan = document.querySelector(".typed-text");
+  const cursorSpan = document.querySelector(".typing-cursor");
+
+  const textArray = ["Hi there,",
+                      "I'm Ina Tang :D",];  /* The text */
+
+  const typingDelay = 175;
+  const erasingDelay = 125;
+  const newTextDelay = 1225; // Delay between current and next text
+  let textArrayIndex = 0;
+  let charIndex = 0;
+  var speed = 50;  /* The speed/duration of the effect in milliseconds */
+
+  const nodes = [];
+
+  function type() {
+    cursorSpan.classList.add("typing");
+    if (charIndex < textArray[textArrayIndex].length) {
+      // typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+      cursorSpan.insertAdjacentText('beforebegin', textArray[textArrayIndex].charAt(charIndex));
+      charIndex++;
+      setTimeout(type, typingDelay);
+    }
+    else if (charIndex == textArray[textArrayIndex].length && textArrayIndex + 1 == textArray.length) {
+      cursorSpan.classList.remove("typing");
+      return;
+    }
+    else {
+      cursorSpan.classList.remove("typing");
+      setTimeout(erase, newTextDelay);
+    }
+  }
+
+  function erase() {
+    cursorSpan.classList.add("typing");
+    if (charIndex > 0) {
+      // typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+      typedTextSpan.removeChild(cursorSpan.previousSibling);
+      charIndex--;
+      setTimeout(erase, erasingDelay);
+    }
+    else {
+      cursorSpan.classList.remove("typing");
+      textArrayIndex++;
+      setTimeout(type, typingDelay + 1100);
+    }
+  }
+
+  if(textArrayIndex>=textArray.length) return;
+  if(textArray.length) setTimeout(type, newTextDelay + 250);
+}
+
+document.addEventListener('DOMContentLoaded', function() { typeWriter() });
+  </script>
 </BaseLayout>
