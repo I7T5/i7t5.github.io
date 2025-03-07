@@ -2,15 +2,24 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/Tag.astro"
+import Title from "../../components/Title.astro";
 
-const allPosts = await getCollection("blog")
-const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
+const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
+const allProjects = await getCollection("projects")
+const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
+const projectTags = allProjects.map((project: any) => project.data.tags).flat(); 
+
+const tags = [...new Set(postTags.concat(projectTags))].filter(tag => tag != 'research' && tag != 'project').sort();
+// TODO: sort by alphabetical order
+
+// const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat().concat(allProjects.map((project: any) => project.data.togs).flat()))];
 const pageTitle = "Tags"
 
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <p>List of all tags</p>
-  <ul>
+  <Title>Tags</Title>
+  <ul class="text-gray-4">
+    <Tag tag="research" /><Tag tag="project" /><br />
     {tags.map((tag: any) => <Tag tag={tag} />)}
   </ul>
 </BaseLayout>

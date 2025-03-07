@@ -4,7 +4,8 @@ import UnoCSS from 'unocss/astro'
 
 
 export default defineConfig({
-  // TODO: site: "",
+  site: "https://i7t5.com",
+
   integrations: [
     UnoCSS({
       injectReset: true

@@ -1,6 +1,5 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Tag from "../components/Tag.astro"
+import Links from "../components/Links.astro";
 import Title from "../components/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -12,31 +11,51 @@ const me = {
 };
 
 const skills = {
-  programmingLanguages: ["Python", "Java", "JavaScript", "SQL", "Swift", "R", "C"], 
-  tools: ["Git", "GitHub", "HTML/CSS", "Linux", "Jupyter Notebook", "Xcode", "VS Code", "Intellij IDEA"],
+  programmingLanguages: [
+    "Python",
+    "Java",
+    "JavaScript",
+    "SQL",
+    "Swift",
+    "R",
+    "C",
+  ],
+  tools: [
+    "Git",
+    "GitHub",
+    "HTML/CSS",
+    "Linux",
+    "Jupyter Notebook",
+    "Xcode",
+    "VS Code",
+    "Intellij IDEA",
+  ],
   librariesAndPackages: ["scikit-learn", "matplotlib", "numpy", "JUnit"],
-  languages: ["English", "Chinese"]
-}
-
+  languages: ["English", "Chinese"],
+};
 ---
 
 <BaseLayout>
-	<Title>Ina Tang</Title>
-	#college-student #coder #wanna-be-designer
-  <!-- TODO: put an animation or game here -->
+  <Title>Ina Tang</Title>
+  <p class="text-secondary mb-2.5"> #mathmatician #coder #wanna-be-designer #college-student</p>
+  <!-- TODO: put an animation/interaction/game here -->
 
-  <!-- <Navigation /> -->
-  <pre>
-    <code class="text-secondary">
-> <span class="text-red">ls</span>
-<a class="hover:text-blue transition" href="/blog/">/blog</a>
-<a class="hover:text-blue transition" href="/projects/">/projects</a>
-  </code>
+  <p class="">Hi! I'm Ina (Yina) Tang from Shanghai, China.</p>
+  <p class="mt-0.5">
+    I enjoy mathematics and coding (yes, even in my spare time), as well as philosophy and theology.
+    I am currently reading the <i>Pensées</i> and <i>Anne of Green Gables</i>. My goal this year is to finish <i>The Simarilion</i>...
+  </p>
 
-  </pre>
+  <pre><code class="text-secondary">
+&#x003E <span class="text-red">ls</span> <!-- &#x003E == '>'; for better highlighting in IDEs-->
+<a class="hover:text-blue transition" href="/blog/">blog</a>
+<a class="hover:text-blue transition" href="/projects/">projects</a>
+<a class="hover:text-blue transition" href="/tags/">tags</a>
+  </code></pre> <!-- DON'T LINT THIS for the margin between the social... -->
 
+  <Links />
 
-
-
+  <!-- CV/RESUMÉ GITHUB GOODREADS (underline) -->
+    <!-- <Social platform="github" username="i7t5" /> -->
 
 </BaseLayout>

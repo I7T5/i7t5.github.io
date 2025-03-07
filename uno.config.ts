@@ -16,6 +16,7 @@ export default defineConfig({
             // TODO: color: text-base
             'font-family': 'Nunito', 
             'font-weight': 'normal',
+            'text-wrap': 'balance',
             'margin-top': '1em',
             'margin-bottom': 0,
             // 'font-size': '1.75em'
@@ -55,7 +56,7 @@ export default defineConfig({
               italic: false,  // italic shrinks width...
             }],
             // serif: ["Spectral"],
-            // mono: ["IBM Plex Mono", "DM Mono"],
+            mono: ["IBM Plex Mono"], 
             display: ["Nunito"],
           }
       })

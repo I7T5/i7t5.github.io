@@ -1,9 +1,35 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Title from "../../components/Title.astro"; 
+import ProjectItem from "../../layouts/ProjectItem.astro";
+import Title from "../../components/Title.astro";
+const allProjects = await getCollection("projects");
+allProjects.sort((a, b) => {
+  if (a.data.endDate.valueOf() == 0 || b.data.endDate.valueOf() == 0) {
+    if (a.data.endDate.valueOf() == 0 && b.data.endDate.valueOf() == 0) {
+      return a.data.startDate > b.data.startDate ? -1 : 1
+    }
+
+    // if a is current
+    if (a.data.endDate.valueOf() == 0) {
+      // if a's startDate is after b's endDate, put a first
+      return a.data.startDate > b.data.endDate ? -1 : 1
+    }
+
+    if (b.data.endDate.valueOf() == 0) {
+      return b.data.startDate < a.data.endDate ? -1 : 1
+    }
+  }
+  return a.data.endDate > b.data.endDate ? -1 : 1; 
+})
+
+const pageTitle = "Projects";
 ---
 
 <BaseLayout>
-  <Title>Projects</Title>
-
+  <Title>{pageTitle}</Title>
+  <!-- Words useful or interesting (or neither) --->
+  <ul>
+    {allProjects.map((project: any) => <ProjectItem project={project}/>)}
+  </ul>
 </BaseLayout>

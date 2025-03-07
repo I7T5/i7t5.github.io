@@ -3,7 +3,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostItem from "../layouts/PostItem.astro";
 import Title from "../components/Title.astro";
-const allPosts = await getCollection("blog");
+const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
+allPosts.sort((a, b) => a.data.pubDate > b.data.pubDate ? -1 : 1)
 const pageTitle = "Blog";
 ---
 
