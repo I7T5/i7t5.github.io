@@ -19,5 +19,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# IDEs and editors
 .idea/
 .vscode/
+
+# personal notes
+NOTES.md
