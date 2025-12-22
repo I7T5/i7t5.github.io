@@ -1,13 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 const { tool } = Astro.props;
-const toolStr = tool.toLowerCase().split().join("-")
+const toolStr = tool.toLowerCase().replace(/ /g, "-");  // snake-case tools
 
 const allProjects = await getCollection("projects")
 const tools = [...new Set(allProjects.map((project: any) => project.data.tools).flat())];
 let url = (tools.includes(tool)) ? `/tool/${tool}` : "javascript:;"
 ---
 
-<a class="pr-0.25 font-mono text-0.8rem transition">{tool}</a>
+<a class="pr-0.25 font-mono text-0.8rem transition">{toolStr}</a>
 
 <!-- TODO: implement href and hover:font-bold -->
