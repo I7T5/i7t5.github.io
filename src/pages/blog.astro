@@ -9,7 +9,7 @@ const pageTitle = "Blog";
 ---
 
 <BaseLayout>
-  <Title >{pageTitle}</Title>
+  <Title>{pageTitle}</Title>
   <!-- Words useful or interesting (or neither) --->
   <ul>
     {allPosts.map((post: any) => <PostItem post={post}/>)}
