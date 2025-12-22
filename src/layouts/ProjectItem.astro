@@ -1,4 +1,5 @@
 ---
+import ProjectBullets from "./ProjectBullets.astro";
 import Tool from "../components/Tool.astro";
 import Tag from "../components/Tag.astro";
 const { project } = Astro.props;
@@ -6,20 +7,19 @@ const startDate = project.data.startDate.toLocaleDateString(undefined, { month: 
 
 const hasEndDate = project.data.endDate.valueOf() != 0
 const endDate = hasEndDate ? project.data.endDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : null;
+const dateString = hasEndDate ? (startDate === endDate ? startDate : `${startDate} – ${endDate}`) : `${startDate} – current`;
 
-const singularDescription = project.data.descriptions.length == 1
-const disableLink = project.data.disableLink
+const onlyOneBullet = project.data.bullets.length == 1; 
+const enableLink = project.data.enableLink; 
 ---
 
 <li class="py-2">
   <div class="text-balance my-0">
-    { disableLink ? <span>{project.data.title}</span> : <a class="hover:italic" href={`/projects/${project.id}`}>{project.data.title}</a> }
-    <span class="text-gray-4"> · {hasEndDate ? `${startDate} – ${endDate}` : `${startDate} – current`}</span>
+    { enableLink ?  <a class="hover:italic" href={`/projects/${project.id}`}>{project.data.title}</a> : <span>{project.data.title}</span> }
+    <span class="text-gray-4"> · {dateString}</span>
   </div>
 
   <div class="text-gray-4 -mt-0.5 font-mono">{project.data.tools.map((tool: string) => <Tool tool={tool} />)}</div>
-  <ul class={`list-outside ${singularDescription ? "pt-0.5" : "py-1"}`}>
-    { project.data.descriptions.map((description: any) => <li class={`text-sm text-gray-4 ${singularDescription ? "italic" : "list-disc ml-8"}`}>{description}</li>) }
-  </ul>
+  <ProjectBullets bullets={project.data.bullets} onlyOneBullet={onlyOneBullet} />
   <div class="text-gray-3">{project.data.tags.map((tag: string) => <Tag tag={tag} />)}</div>
 </li>

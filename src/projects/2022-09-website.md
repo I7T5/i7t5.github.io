@@ -1,14 +1,15 @@
 ---
-title: "Personal Website (i7t5.com)"
+title: "Personal Website (this site)"
 startDate: 2022-09-01
 endDate: 1970-01-01
 tools: ["Astro", "UnoCSS", "HTML/CSS", "JavaScript", "Git", "GitHub"]
-descriptions: [
+bullets: [
   "Some things about me displayed using Astro and UnoCSS hosted on GitHub Pages"
 ]
 repository: "https://github.com/I7T5/i7t5.github.io"
-tags: ["project", "web dev", "UI UX", "HCI"]
-disableLink: True
+tags: ["project", "web dev", "UI/UX", "HCI"]
+enableLink: False
 ---
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit

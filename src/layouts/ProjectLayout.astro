@@ -1,0 +1,41 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Repository from "../components/Repository.astro";
+import ProjectBullets from "./ProjectBullets.astro";
+import Tag from "../components/Tag.astro";
+import { undefined } from "astro:schema";
+
+const { frontmatter } = Astro.props;
+
+// Format project start and end dates
+// NOTE: Show both startYear and endYear even if they are the same
+const startDate = frontmatter.startDate.toLocaleDateString(undefined, { 
+  year: 'numeric',
+  month: 'short',
+});
+const endDate = frontmatter.endDate.toLocaleDateString(undefined, {
+  year: 'numeric',
+  month: 'short',
+});
+const dateStr = frontmatter.endDate.valueOf() === 0 ? `${startDate} – current` : startDate === endDate ? startDate : `${startDate} – ${endDate}`;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+<article class="prose transition">
+  <h1 class="text-base font-semibold">{frontmatter.title}</h1>
+  <p>
+    <span class="text-secondary">{dateStr}</span>
+    {frontmatter.repository ? <span class="text-secondary"> · </span><Repository url={frontmatter.repository} customText="repository" /> : null}
+  </p>
+  <!-- QUESTION: Should I include tools in here too? -->
+  <ProjectBullets bullets={frontmatter.bullets} onlyOneBullet={frontmatter.bullets.length === 1} />
+  <!-- <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} /> -->
+  <slot />
+
+  <!-- Tags -->
+  <div class="pt-2 mb-4 text-secondary">
+    {frontmatter.tags.map((tag: any) => <Tag tag={tag} />)}
+  </div>
+  <hr>
+</article>
+</BaseLayout>

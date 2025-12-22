@@ -26,13 +26,14 @@ const projects = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: "./src/projects" }),
   schema: z.object({
     title: z.string(),
+    authors: z.array(z.string()).optional(),
     startDate: z.date(),
     endDate: z.date(),
     tools: z.array(z.string()),
-    descriptions: z.array(z.string()),
-    // repository: z.string().url(),
+    bullets: z.array(z.string()),
+    repository: z.string().url().optional(),
     tags: z.array(z.string()),
-    disableLink: z.boolean()
+    enableLink: z.boolean()
   })
 });
 

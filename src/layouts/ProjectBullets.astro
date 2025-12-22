@@ -1,0 +1,8 @@
+---
+const { bullets, onlyOneBullet } = Astro.props;
+---
+
+<ul class={`list-outside pl-0 ${onlyOneBullet ? "pt-0.5" : "py-1"}`} >
+  { bullets.map((bullet: any) => <li class={`text-sm text-gray-4 ${onlyOneBullet ? "italic list-none" : "list-disc ml-6"}`}>{bullet}</li>) }
+</ul>
+

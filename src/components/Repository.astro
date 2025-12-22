@@ -1,0 +1,8 @@
+---
+const { url, customText } = Astro.props;
+---
+
+<!-- Based on styling for "GitHub in ./Links.astro" -->
+<a class="text-black text-sm hover:inherit font-mono border-b-1.5 transition mr-1" href={url} target="_blank" rel="noopener noreferrer">
+  {customText}
+</a>

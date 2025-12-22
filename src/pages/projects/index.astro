@@ -5,22 +5,38 @@ import ProjectItem from "../../layouts/ProjectItem.astro";
 import Title from "../../components/Title.astro";
 const allProjects = await getCollection("projects");
 allProjects.sort((a, b) => {
-  if (a.data.endDate.valueOf() == 0 || b.data.endDate.valueOf() == 0) {
-    if (a.data.endDate.valueOf() == 0 && b.data.endDate.valueOf() == 0) {
-      return a.data.startDate > b.data.startDate ? -1 : 1
-    }
+  // // if either project is current
+  // if (a.data.endDate.valueOf() == 0 || b.data.endDate.valueOf() == 0) {
+  //   // if both are current
+  //   if (a.data.endDate.valueOf() == 0 && b.data.endDate.valueOf() == 0) {
+  //     return a.data.startDate > b.data.startDate ? -1 : 1
+  //   }
 
-    // if a is current
-    if (a.data.endDate.valueOf() == 0) {
-      // if a's startDate is after b's endDate, put a first
-      return a.data.startDate > b.data.endDate ? -1 : 1
-    }
+  //   // if a is current
+  //   if (a.data.endDate.valueOf() == 0) {
+  //     // if a's startDate is after b's endDate, put a first
+  //     return -1
+  //   }
 
-    if (b.data.endDate.valueOf() == 0) {
-      return b.data.startDate < a.data.endDate ? -1 : 1
-    }
+  //   if (b.data.endDate.valueOf() == 0) {
+  //     return b.data.startDate < a.data.endDate ? -1 : 1
+  //   }
+  // }
+  // return a.data.endDate > b.data.endDate ? -1 : 1; 
+
+  // if both projects have the same endDate, sort by startDate
+  // if (a.data.endDate.valueOf() == b.data.endDate.valueOf()) {
+  //   return a.data.startDate > b.data.startDate ? -1 : 1;
+  // } else { // otherwise, sort by endDate
+  //   return a.data.endDate.valueOf() == 0 ? -1 : b.data.endDate.valueOf() == 0 ? 1 : a.data.endDate > b.data.endDate ? -1 : 1;
+  // }
+
+  // if both projects have the same startDate, sort by endDate
+  if (a.data.startDate.valueOf() == b.data.startDate.valueOf()) {
+    return a.data.endDate > b.data.endDate ? -1 : 1;
+  } else { // otherwise, sort by startDate
+    return a.data.startDate > b.data.startDate ? -1 : 1;
   }
-  return a.data.endDate > b.data.endDate ? -1 : 1; 
 })
 
 const pageTitle = "Projects";
