@@ -45,6 +45,9 @@ export default defineConfig({
           '.post-references ul' : {
             'margin-top': '.25em',  
           },
+          'img': {
+            'padding': '0 4em 0 2em',
+          }
         },
       }), 
       presetWebFonts({
