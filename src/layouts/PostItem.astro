@@ -1,5 +1,6 @@
 ---
-import Tag from "../components/Tag.astro";
+import Tags from "../components/Tags.astro";
+
 const { post } = Astro.props;
 const pubDate = post.data.pubDate
 const publishedThisYear = pubDate.getFullYear() == new Date().getFullYear()
@@ -11,5 +12,5 @@ const postDate = publishedThisYear ? pubDate.toLocaleDateString(undefined, {mont
 <li class="py-1">
   <a class="hover:italic" href={`/posts/${post.id}`}>{post.data.title}</a>
   <span class="text-gray-4"> · {postDate}</span>
-  <div class="text-gray-3">{post.data.tags.map((tag: any) => <Tag tag={tag} />)}</div>
+  <Tags tags={post.tags} includeSpacing={false} />
 </li>

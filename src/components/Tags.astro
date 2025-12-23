@@ -1,0 +1,7 @@
+---
+import Tag from './Tag.astro';
+const { tags, includeSpacing } = Astro.props;
+---
+<div class=`${includeSpacing === true ? "pt-2 mb-4 text-secondary" : "text-gray-3"}`>
+  {tags.map((tag: any) => <Tag tag={tag} />)}
+</div>
