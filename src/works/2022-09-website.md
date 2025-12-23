@@ -1,5 +1,6 @@
 ---
 title: "Personal Website (this site)"
+affiliation: "Personal Project"
 startDate: 2022-09-01
 endDate: 1970-01-01
 tools: ["Astro", "UnoCSS", "HTML/CSS", "JavaScript", "Git", "GitHub"]

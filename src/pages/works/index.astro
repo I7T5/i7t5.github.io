@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectItem from "../../layouts/ProjectItem.astro";
+import WorkItem from "../../layouts/WorkItem.astro";
 import Title from "../../components/Title.astro";
-const allProjects = await getCollection("projects");
-allProjects.sort((a, b) => {
+const allWorks = await getCollection("works");
+allWorks.sort((a, b) => {
   // // if either project is current
   // if (a.data.endDate.valueOf() == 0 || b.data.endDate.valueOf() == 0) {
   //   // if both are current
@@ -39,13 +39,13 @@ allProjects.sort((a, b) => {
   }
 })
 
-const pageTitle = "Projects";
+const pageTitle = "Works (Research and Projects)";
 ---
 
 <BaseLayout>
   <Title>{pageTitle}</Title>
   <!-- Words useful or interesting (or neither) --->
   <ul>
-    {allProjects.map((project: any) => <ProjectItem project={project}/>)}
+    {allWorks.map((work: any) => <WorkItem work={work}/>)}
   </ul>
 </BaseLayout>

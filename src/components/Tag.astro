@@ -5,10 +5,10 @@ const { tag } = Astro.props;
 const tagStr = tag.toLowerCase().replace(/ /g, "-");  // snake-case tags
 
 const allPosts = await getCollection("blog")
-const allProjects = await getCollection("projects")
+const allWorks = await getCollection("works")
 const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
-const projectTags = allProjects.map((project: any) => project.data.tags).flat(); 
-const tags = [...new Set(postTags.concat(projectTags))];
+const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
+const tags = [...new Set(postTags.concat(workTags))];
 let url = (tags.includes(tag)) ? `/tags/${tag}` : "javascript:;"
 ---
 

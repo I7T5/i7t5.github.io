@@ -1,0 +1,17 @@
+---
+import { getCollection, render } from 'astro:content';
+import WorkLayout from '../../layouts/WorkLayout.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works', ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
+  return works.map(work => ({
+    params: { slug: work.id }, props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await render(work);
+---
+<WorkLayout frontmatter={work.data}>
+  <Content />
+</WorkLayout>

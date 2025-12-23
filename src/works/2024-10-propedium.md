@@ -1,5 +1,6 @@
 ---
 title: "Propedium"
+affiliation: "Personal Project"
 startDate: 2024-10-01
 endDate: 2024-10-10
 tools: ["Swift", "Xcode", "Git", "GitHub"]

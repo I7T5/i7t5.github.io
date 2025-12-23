@@ -3,23 +3,23 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostItem from '../../layouts/PostItem.astro';
 import Title from '../../components/Title.astro';
-import ProjectItem from '../../layouts/ProjectItem.astro';
+import WorkItem from '../../layouts/WorkItem.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
-  const allProjects = await getCollection("projects")
+  const allWorks = await getCollection('works', ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
   const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
-  const projectTags = allProjects.map((project: any) => project.data.tags).flat(); 
-  const uniqueTags = [...new Set(postTags.concat(projectTags))];
+  const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
+  const uniqueTags = [...new Set(postTags.concat(workTags))];
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post: any) => post.data.tags.includes(tag));
-    const filteredProjects = allProjects.filter((project: any) => project.data.tags.includes(tag))
+    const filteredWorks = allWorks.filter((work: any) => work.data.tags.includes(tag))
     return {
       params: { tag },
       // props: { posts: filteredPosts },
       // props: { projects: filteredProjects },
-      props: { posts: filteredPosts, projects: filteredProjects}
+      props: { posts: filteredPosts, works: filteredWorks}
     };
   });
 }
@@ -27,13 +27,13 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 // const { posts } = Astro.props;
 // const { projects } = Astro.props;
-const { posts, projects } = Astro.props;
+const { posts, works } = Astro.props;
 
 ---
 <BaseLayout pageTitle={tag}>
   <Title>#{tag}</Title>
   <ul>
     {posts.map((post: any) => <PostItem post={post}/>)}
-    {projects.map((project: any) => <ProjectItem project={project}/>)}
+    {works.map((work: any) => <WorkItem work={work}/>)}
   </ul>
 </BaseLayout>

@@ -1,0 +1,27 @@
+---
+import WorkBullets from "./WorkBullets.astro";
+import Tool from "../components/Tool.astro";
+import Tags from "../components/Tags.astro";
+
+const { work } = Astro.props;
+const startDate = work.data.startDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
+const hasEndDate = work.data.endDate.valueOf() !== 0
+const endDate = hasEndDate ? work.data.endDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : null;
+const dateString = hasEndDate ? (startDate === endDate ? startDate : `${startDate} – ${endDate}`) : `${startDate} – current`;
+
+const onlyOneBullet = work.data.bullets.length === 1; 
+const enableLink = work.data.enableLink; 
+---
+
+<li class="py-2">
+  <div class="text-balance my-0">
+    { enableLink ?  <a class="hover:italic" href={`/works/${work.id}`}>{work.data.title}</a> : <span>{work.data.title}</span> }
+    <span class="text-gray-4"> · {dateString}</span>
+  </div>
+
+  <div class="text-gray-4 -mt-0.5 font-mono">{work.data.tools.map((tool: string) => <Tool tool={tool} />)}</div>
+  <WorkBullets bullets={work.data.bullets} onlyOneBullet={onlyOneBullet} />
+  
+  <Tags tags={work.data.tags} includeSpacing={false} />
+  <!-- <div class="text-gray-3">{work.data.tags.map((tag: string) => <Tag tag={tag} />)}</div> -->
+</li>
