@@ -12,5 +12,5 @@ const postDate = publishedThisYear ? pubDate.toLocaleDateString(undefined, {mont
 <li class="py-1">
   <a class="hover:italic" href={`/posts/${post.id}`}>{post.data.title}</a>
   <span class="text-gray-4"> · {postDate}</span>
-  <Tags tags={post.tags} includeSpacing={false} />
+  <Tags tags={post.data.tags} includeSpacing={false} />
 </li>
