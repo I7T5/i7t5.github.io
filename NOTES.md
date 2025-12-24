@@ -8,5 +8,6 @@
 - [] increase view transition duration
 - [] incrase padding below footer
 - [] implement `cd ..` in footer aka nav
+- [] implement back / return-to-last-page button
 - [] [KaTex support](https://astro-paper.pages.dev/posts/how-to-add-latex-equations-in-blog-posts/)
 
