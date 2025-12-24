@@ -47,7 +47,11 @@ export default defineConfig({
           },
           'img': {
             'padding': '0 4em 0 2em',
-          }
+          }, 
+          '#footnote-label': {
+            'font-size': '1rem',
+            'font-style': 'italic',
+          },
         },
       }), 
       presetWebFonts({
@@ -79,9 +83,11 @@ export default defineConfig({
         red: '#fb5151',
       },
     },
-    // rules: [
-    //   ["font-serif", { "font-family": "CMU Serif" }],
-    // ],
+    rules: [
+      // custom utility classes
+      // ['oblique', { 'font-style': 'oblique' }],
+      // ["font-serif", { "font-family": "CMU Serif" }],
+    ],
     preflights: [
       {
         // define local fonts
