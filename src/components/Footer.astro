@@ -1,7 +1,6 @@
 ---
-const isHomepage = Astro.url.pathname == "/";
-const destinations = ['/blog/', '/works/', '/tags/'].filter(dest => Astro.url.pathname != dest);
-
+const isHomepage = Astro.url.pathname === "/";
+const destinations = ['/blog/', '/works/', '/tags/'].filter(dest => Astro.url.pathname !== dest);
 ---
 
 <footer class="mt-4 pb-16">
