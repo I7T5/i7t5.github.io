@@ -7,7 +7,7 @@ import WorkItem from '../../layouts/WorkItem.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
-  const allWorks = await getCollection('works', ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
+  const allWorks = await getCollection('works')
   const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
   const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
   const uniqueTags = [...new Set(postTags.concat(workTags))];
