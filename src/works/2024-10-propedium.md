@@ -9,7 +9,7 @@ bullets: [
 ]
 repository: "https://github.com/I7T5/Propedium"
 tags: ["project", "iOS", "Swift", "app dev", "open source"]
-enableLink: False
+enableLink: false
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit

@@ -9,7 +9,7 @@ bullets: [
 ]
 repository: "https://github.com/I7T5/i7t5.github.io"
 tags: ["project", "web dev", "UI/UX", "HCI"]
-enableLink: False
+enableLink: false
 ---
 
 
