@@ -12,6 +12,7 @@
     "@astrojs/rss": "^4.0.14",
     "astro": "^5.16.6",
     "katex": "^0.16.27",
+    "rehype-callouts": "^2.1.2",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0"

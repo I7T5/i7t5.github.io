@@ -4,6 +4,7 @@ import UnoCSS from 'unocss/astro'
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeCallouts from 'rehype-callouts'
 
 
 export default defineConfig({
@@ -18,6 +19,9 @@ export default defineConfig({
       remarkGfm, // footnotes, tables, strikethrough, autolinks, task lists
       remarkMath,
     ],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [
+      rehypeKatex,
+      rehypeCallouts,  // obsidian-style callouts; customize style someday...
+    ],
   },
 })

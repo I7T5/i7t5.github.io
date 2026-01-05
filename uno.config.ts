@@ -56,6 +56,29 @@ export default defineConfig({
             // color: 'text-foreground',
             'font-size': '1rem',
           },
+          '.prose .callout': {
+            'background-color': 'rgb(from var(--rc-color-light, var(--rc-color-default)) r g b / 0.1)',
+          },
+          '.prose .callout[open] summary': {
+            'padding-bottom': '1em',
+          },
+          '.prose .callout[open] .callout-content p:last-child': {
+            'margin-bottom': '0.5em',
+          },
+          // // callout animations
+          // '.prose .callout .callout-content': {
+          //   'overflow': 'hidden',
+          //   'transition': 'opacity 0.7s ease, max-height 1s ease',
+          // }, 
+          // '.callout:not([open]) .callout-content': {
+          //   'max-height': 0,
+          //   'opacity': 0,
+          // },
+          // '.callout[open] .callout-content': {
+          //   'max-height': '1000px',  // large enough to fit content
+          //   'opacity': 1,
+          //   'padding-bottom': '1em',
+          // },
         },
       }), 
       presetWebFonts({
