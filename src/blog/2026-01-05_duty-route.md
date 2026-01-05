@@ -7,7 +7,7 @@ tags: ["algorithms", "graph theory", "math", "fun"]
 isDraft: true
 ---
 
-## The story
+## the story
 
 An anonymous resident assistant (RA) is trying to find the most efficient route to visit all the resident halls in her building starting from her own room and returning to it at the end of her rounds.
 After the taking Theory of Algorithms, she realized that this sounds strangely similar to the Traveling Salesman Problem, which means, this is an algorithms problem. 
@@ -18,7 +18,7 @@ After the taking Theory of Algorithms, she realized that this sounds strangely s
 Upon further investigation, she found that this problem is called the Rural Postman Problem (RPP), which is a variation of the Traveling Salesman Problem in that we're concerned with find the shortest route that visits a subset of edges ~~vertices~~ in a graph. In her case, the edges are the hallways connecting the resident halls, and the vertices are the exits/stairwells/connectors between halls.
 
 
-## The setup
+## the setup
 
 Definitions: 
 
@@ -36,7 +36,7 @@ Objective:
 The RA wants to minimize the total number of rooms she has to walk through to visit all halls, and, hopefully, end up back at her own room. (If the RA didn't care if she had to end up back at her own room, this would probably be an easier problem.)
 
 
-## The journey
+## the journey
 
 ### First throughts: Preprocessing
 

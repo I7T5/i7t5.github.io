@@ -43,7 +43,7 @@ export default defineConfig({
             'margin-top': '2em',
           },
           '.post-references ul' : {
-            'margin-top': '.25em',  
+            'margin-top': '1em',  
           },
           'img': {
             'padding': '0 4em 0 2em',
@@ -51,6 +51,25 @@ export default defineConfig({
           '#footnote-label': {
             'font-size': '1rem',
             'font-style': 'italic',
+          },
+          '.prose h2, .prose h3, .prose h4, .prose h5, .prose h6': {
+            'font-size': '1em',
+          },
+          '.prose h1': {
+            'font-weight': 'bold',
+          },
+          '.prose h2': {
+            'font-size': '1.2em',
+            'font-weight': 'bold',
+            'text-align': 'center',
+            'margin-top': '2rem',
+            'margin-bottom': '0.75rem',
+          },
+          '.prose h3': {
+            'font-size': '1.1em',
+            'font-weight': 'bold',
+            'margin-top': '1.5rem',
+            'margin-bottom': '0.5rem',
           },
           '.prose .katex': {
             // color: 'text-foreground',
