@@ -11,7 +11,10 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
     "astro": "^5.16.6",
-    "remark-gfm": "^4.0.1"
+    "katex": "^0.16.27",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.82",

@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import UnoCSS from 'unocss/astro'
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 
 export default defineConfig({
@@ -14,6 +16,8 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkGfm, // footnotes, tables, strikethrough, autolinks, task lists
+      remarkMath,
     ],
+    rehypePlugins: [rehypeKatex],
   },
 })

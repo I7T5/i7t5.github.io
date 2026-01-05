@@ -52,6 +52,10 @@ export default defineConfig({
             'font-size': '1rem',
             'font-style': 'italic',
           },
+          '.prose .katex': {
+            // color: 'text-foreground',
+            'font-size': '1rem',
+          },
         },
       }), 
       presetWebFonts({
