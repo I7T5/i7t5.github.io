@@ -5,13 +5,28 @@
 
 ## TODO
 
-- [] increase view transition duration
-- [] incrase padding below footer
-- [] implement `cd ..` in footer aka nav
-- [] implement back / return-to-last-page button
+Soon:
+- [x] add recent works
 - [x] [KaTex support](https://astro-paper.pages.dev/posts/how-to-add-latex-equations-in-blog-posts/)
 - [] [404 page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page)
-- [] vector field background, with cursor being center of gravity (cursor being a dot)
-- [] add recent works
+- [] Write about reseaerch experience in hodgerank
+
+Later: 
 - [] allow slashes in tags (e.g., "UI/UX") (currently breaks tag page generation)
+- [] implement `cd ..` in footer aka nav
+    - [] implement back / return-to-last-page button
+
+Someday:
+- [] dark mode toggle and auto-detect system theme
+- [] vector field background, with cursor being center of gravity (cursor being a dot) and a right click to generate either a center or a focus point
+- [] increase view transition duration
+
+
+
+
+
+
+
+
+
 
