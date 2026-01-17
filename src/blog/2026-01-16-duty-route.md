@@ -15,7 +15,7 @@ After the taking Theory of Algorithms, she realized that this sounds strangely s
 > [!QUESTION]- What is the Traveling Salesman Problem?
 > The Traveling Salesman Problem is a classic problem in computer science and mathematics. It involves finding the shortest possible route that visits a set of cities (aka nodes, or vertices) exactly once and returns to the original city. It is related to the [Konigsberg Bridge Problem](https://www.britannica.com/science/Konigsberg-bridge-problem). 
 
-Upon further investigation, she found that this problem is called the Rural Postman Problem (RPP), which is a variation of the Traveling Salesman Problem in that we're concerned with find the shortest route that visits a subset of edges ~~vertices~~ in a graph. In her case, the edges are the hallways connecting the resident halls, and the vertices are the exits/stairwells/connectors between halls.
+Upon further investigation, she found that this problem is called the Rural Postman Problem (RPP), which is a variation of the Traveling Salesman Problem in that we're concerned with find the shortest route that visits a subset of edges ~~vertices~~ in a graph. (Definition for the RPP to come later.) In her case, the edges are the hallways connecting the resident halls, and the vertices are the exits/stairwells/connectors between halls.
 
 
 ## the setup
@@ -46,18 +46,18 @@ The RA wants to minimize the total number of rooms she has to walk through to vi
 
 The graph represents the South-West building layout with vertices as exits, stairwells, or corners and edges weighted by the number of rooms between exits. Notice the vertices are ordered left to right according to west to south, and each layer represents a floor of the building.
 
-Since West Lobby, 022, 025, Old MAP, 117, 120, and 325 are singularly connected to the rest of the graph, we can ignore them for the purpose of finding a shortest Hamiltonian Cycle. But I will add the extra distance for doubling back on them to the final sum as a constant anyways, just for precision/fun. 
+Since West Lobby, 022, 025, Old MAP, 117, 120, and 325 are singularly connected to the rest of the graph, we can ignore them for the purposes of the RPP. But I will add the extra distance for doubling back on them to the final sum as a constant anyways, just for precision/fun. 
 
 Now the graph looks like this:
 ![Simplified South-West Building Layout](/assets/blog/2026-01-16/sw_no-singular.svg)
 
 ### If the RA doesn't need to return to her room...
 
-This is probably an easier problem than the Rural Postman Problem (RPP), but it is not the problem I want to deal with right now...
+This is probably an easier problem than the RPP, but it is not the problem I want to deal with right now...
 
 ### If the RA needs to return to her room...
 
-Then this would be an instance of the undirected RPP with a fixed starting point. 
+Then this would be exactly the undirected RPP with a fixed starting point. 
 
 > [!QUESTION]- What exactly is the Rural Postman Problem?
 > Given a graph $G = (V, E)$ and $E'\subseteq E$ a subset of the edges of the graph (and no particular starting point), find the shortest closed path (cycle) that traverses every edge in that $E'$ at least once and return to the starting point. 
