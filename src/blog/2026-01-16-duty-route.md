@@ -65,13 +65,13 @@ Then this would be exactly the undirected RPP with a fixed starting point.
 
 Several algorithms exist to solve the RPP. [Christofides et al. (1981)](https://www.researchgate.net/publication/239385320_An_algorithm_for_the_Rural_Postman_Problem) proposed one of the first[^1] exact algorithms to solve the RPP without approximation using a technique called branch and bound. More recently, [Gutin, Wahlström, and Yeo (2017)](https://www.sciencedirect.com/science/article/pii/S0022000016300411) proposed an exact algorithms that runs in $O(2^k)$ time, where $k$ is the number of weakly connected components in the subgraph of $G$ induced by $E'$ (whatever that means) based on [Eulerian extensions](https://www.google.com/search?q=eulerian%20extensions). 
 
-While Christofides et al.'s algorithm does not make any sense for me, Gutin, Walstrom, and Yeo's algorithms based actually looks approachable and interesting. (Eulerian extensions seem intuitive enough.) However, with school starting again I don't have the time to implement them 😭. But I did get to find a couple solutions better than the one I used just from the graph already: 
+While Christofides et al.'s algorithm does not make any sense for me, Gutin, Walstrom, and Yeo's algorithms based actually looks approachable and interesting. (Eulerian extensions seem intuitive enough.) However, with school starting again I don't have the time to implement them 😭. But I did get to find a couple solutions better than the one I used just from the graphs already: 
 
 ![Solution 1](/assets/blog/2026-01-16/sw_sol1.jpg)
 
 ![Solution 2](/assets/blog/2026-01-16/sw_sol2.jpg)
 
-I suppose we can call these solutions "greedy" or "heuristic", where we are minimizing extra stairs, after taking all the stairs that we need to walk into account.
+I suppose we can call these solutions "greedy" since we are minimizing extra stairs, after taking all the stairs that we need to walk into account. If not, they;re at least heuristic. We always try to use the fanciest terminologies :) (jk)
 
 That's all my findings for now. 
 
