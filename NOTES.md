@@ -20,6 +20,7 @@ Someday:
 - [] dark mode toggle and auto-detect system theme
 - [] vector field background, with cursor being center of gravity (cursor being a dot) and a right click to generate either a center or a focus point
 - [] increase view transition duration
+- [] Email hosting and Instagram page for i7t5
 
 
 
