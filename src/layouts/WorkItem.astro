@@ -13,7 +13,7 @@ const onlyOneBullet = work.data.bullets.length === 1;
 const enableLink = work.data.enableLink; 
 ---
 
-<li class="py-2">
+<li class="work-item py-2 px-3 rd-lg">
   <div class="text-balance my-0">
     { enableLink ?  <a class="hover:italic" href={`/works/${work.id}`}>{work.data.title}</a> : <span>{work.data.title}</span> }
     <span class="text-gray-4"> · {dateString}</span>

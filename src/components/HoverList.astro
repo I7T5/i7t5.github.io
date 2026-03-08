@@ -1,0 +1,42 @@
+---
+---
+
+<div class="hover-list relative -mx-3">
+  <div class="hover-indicator" style="position:absolute;left:0;width:2px;border-radius:9999px;background-color:#0000ff;opacity:0;pointer-events:none;z-index:2;transition:top 200ms cubic-bezier(0.4,0,0.2,1),height 200ms cubic-bezier(0.4,0,0.2,1),opacity 150ms ease;"></div>
+  <ul class="relative z-1">
+    <slot />
+  </ul>
+</div>
+
+<script is:inline>
+  function initHoverLists() {
+    document.querySelectorAll('.hover-list:not([data-hover-init])').forEach(function(container) {
+      container.setAttribute('data-hover-init', '');
+      var indicator = container.querySelector('.hover-indicator');
+      var ul = container.querySelector('ul');
+      if (!indicator || !ul) return;
+
+      ul.querySelectorAll(':scope > li').forEach(function(item) {
+        item.addEventListener('mouseenter', function() {
+          var containerRect = container.getBoundingClientRect();
+          var itemRect = item.getBoundingClientRect();
+          var styles = window.getComputedStyle(item);
+          var paddingTop = parseFloat(styles.paddingTop);
+          var paddingBottom = parseFloat(styles.paddingBottom);
+
+          indicator.style.top = (itemRect.top - containerRect.top + paddingTop) + 'px';
+          indicator.style.height = (itemRect.height - paddingTop - paddingBottom) + 'px';
+          indicator.style.opacity = '1';
+        });
+      });
+
+      container.addEventListener('mouseleave', function() {
+        indicator.style.opacity = '0';
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initHoverLists);
+  document.addEventListener('DOMContentLoaded', initHoverLists);
+  if (document.readyState !== 'loading') initHoverLists();
+</script>

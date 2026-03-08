@@ -9,7 +9,7 @@ const postDate = publishedThisYear ? pubDate.toLocaleDateString(undefined, {mont
 // TODO: incorporate year into blog post listmap
 ---
 
-<li class="py-1">
+<li class="post-item py-1.5 px-3 rd-lg">
   <a class="hover:italic" href={`/posts/${post.id}`}>{post.data.title}</a>
   <span class="text-gray-4"> · {postDate}</span>
   <Tags tags={post.data.tags} includeSpacing={false} />

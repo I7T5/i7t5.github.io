@@ -136,7 +136,6 @@ export default defineConfig({
     ],
     preflights: [
       {
-        // define local fonts
         getCSS: () => ``,
       },
     ],

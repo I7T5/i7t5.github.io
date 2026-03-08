@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostItem from "../layouts/PostItem.astro";
 import Title from "../components/Title.astro";
+import HoverList from "../components/HoverList.astro";
 const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
 allPosts.sort((a, b) => a.data.pubDate > b.data.pubDate ? -1 : 1)
 const pageTitle = "Blog";
@@ -11,7 +12,7 @@ const pageTitle = "Blog";
 <BaseLayout>
   <Title>{pageTitle}</Title>
   <!-- Words useful or interesting (or neither) --->
-  <ul>
+  <HoverList>
     {allPosts.map((post: any) => <PostItem post={post}/>)}
-  </ul>
+  </HoverList>
 </BaseLayout>
