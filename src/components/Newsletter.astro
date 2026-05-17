@@ -1,0 +1,56 @@
+<div class="text-gray-4 mt-10">
+  <button
+    id="newsletter-toggle"
+    type="button"
+    class="hover:text-blue border-b-1.5 transition mr-1"
+    aria-expanded="false"
+    aria-controls="newsletter-form"
+  >
+    <span class="i-lucide-chevron-right chevron transition-transform duration-300 ease-out"></span>
+    Sign up for my newsletter / Receive emails for my blog posts!
+  </button>
+  <form id="newsletter-form" class="flex items-center gap-2" inert>
+    <input
+      type="email"
+      required
+      placeholder="friend@email.com"
+      class="border-0 border-b-1.5 border-gray-3 bg-transparent outline-none focus:border-blue px-1 py-0.5 flex-1"
+    />
+    <button
+      type="submit"
+      class="border-0 bg-transparent hover:text-red transition px-2 py-0.5"
+    >
+      Subscribe
+    </button>
+  </form>
+</div>
+
+<style>
+  #newsletter-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(90deg);
+  }
+  #newsletter-form {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-out, opacity 300ms ease-out, margin-top 300ms ease-out;
+  }
+  #newsletter-form.is-open {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('newsletter-toggle');
+  const form = document.getElementById('newsletter-form');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    form?.classList.toggle('is-open', !expanded);
+    if (expanded) form?.setAttribute('inert', '');
+    else form?.removeAttribute('inert');
+  });
+</script>
