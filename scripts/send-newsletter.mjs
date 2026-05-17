@@ -43,6 +43,31 @@ function rewriteUrls() {
   };
 }
 
+function hasClass(node, name) {
+  const c = node.properties?.className;
+  return Array.isArray(c) ? c.includes(name) : c === name;
+}
+
+function flattenCallouts() {
+  return (tree) => {
+    visit(tree, "element", (node) => {
+      if (node.tagName === "details" && hasClass(node, "callout")) {
+        node.tagName = "div";
+        delete node.properties?.open;
+        for (const child of node.children) {
+          if (child.type !== "element") continue;
+          if (child.tagName === "summary") {
+            child.tagName = "div";
+            child.children = child.children.filter(
+              (c) => !(c.type === "element" && hasClass(c, "callout-fold-icon")),
+            );
+          }
+        }
+      }
+    });
+  };
+}
+
 const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
@@ -50,6 +75,7 @@ const processor = unified()
   .use(remarkRehype, { allowDangerousHtml: true })
   .use(rehypeKatex)
   .use(rehypeCallouts)
+  .use(flattenCallouts)
   .use(rewriteUrls)
   .use(rehypeStringify, { allowDangerousHtml: true });
 
@@ -76,11 +102,20 @@ function wrap({ title, description, tags, bodyHtml, postUrl }) {
   img { max-width: 100%; height: auto; }
   blockquote { border-left: 3px solid #ddd; padding-left: 1rem; color: #555; margin-left: 0; }
   .callout { background: #f6f6f6; border-left: 3px solid #999; padding: 0.5rem 1rem; margin: 1rem 0; }
+  .callout-title { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .callout-title-icon { display: inline-flex; }
+  .callout-title-icon svg { width: 1em; height: 1em; }
+  .callout-content > :first-child { margin-top: 0; }
+  .callout-content > :last-child { margin-bottom: 0; }
+  .description { color: #555; font-style: italic; margin: 0 0 0.5rem; }
+  .tags { color: #999; font-size: 0.875rem; margin: 0 0 1.5rem; }
   .footer { color: #999; font-size: 0.875rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee; }
 </style>
 </head>
 <body>
 <h1>${escape(title)}</h1>
+${descHtml}
+${tagsHtml}
 ${bodyHtml}
 <div class="footer">
   Read on <a href="${postUrl}">i7t5.com</a>.
@@ -94,12 +129,12 @@ function escape(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
-async function resend(path, body) {
+async function resend(path, body, method = "POST") {
   const res = await fetch(`https://api.resend.com${path}`, {
-    method: "POST",
+    method,
     headers: {
       Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
+      ...(body ? { "Content-Type": "application/json" } : {}),
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -132,11 +167,22 @@ for (const file of files) {
   const slug = basename(file, ".md");
   const postUrl = `${SITE}/posts/${slug}`;
   const bodyHtml = String(await processor.process(content));
-  const html = wrap({ title: fm.title, bodyHtml, postUrl });
+  const html = wrap({
+    title: fm.title,
+    description: fm.description,
+    tags: fm.tags,
+    bodyHtml,
+    postUrl,
+  });
 
   if (dryRun) {
     console.log(`--- ${file} ---`);
     console.log(html);
+    continue;
+  }
+
+  if (!(await audienceHasContacts())) {
+    console.log(`skip ${file} (audience has no contacts)`);
     continue;
   }
 
