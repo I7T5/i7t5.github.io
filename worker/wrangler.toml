@@ -1,0 +1,7 @@
+name = "contact-form"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+
+[vars]
+TO_EMAIL = "inatang75@outlook.com"
+ALLOWED_ORIGIN = "https://i7t5.com"

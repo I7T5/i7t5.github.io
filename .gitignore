@@ -22,3 +22,7 @@ pnpm-debug.log*
 # IDEs and editors
 .idea/
 .vscode/
+
+# Cloudflare Worker
+worker/.dev.vars
+worker/.wrangler/
