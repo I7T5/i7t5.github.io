@@ -108,6 +108,11 @@ async function resend(path, body) {
   return text ? JSON.parse(text) : {};
 }
 
+async function audienceHasContacts() {
+  const res = await resend(`/audiences/${AUDIENCE_ID}/contacts`, null, "GET");
+  return Array.isArray(res.data) && res.data.length > 0;
+}
+
 for (const file of files) {
   if (!file.endsWith(".md")) {
     console.log(`skip ${file} (not markdown)`);
