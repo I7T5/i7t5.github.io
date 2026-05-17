@@ -4,4 +4,6 @@ compatibility_date = "2026-05-01"
 
 [vars]
 TO_EMAIL = "inatang75@outlook.com"
-ALLOWED_ORIGIN = "https://i7t5.com"
+FROM_EMAIL = "hello@i7t5.com"
+AUDIENCE_ID = "4712bf61-5bf3-45d2-9876-26ba252e633b"
+ALLOWED_ORIGIN = "https://i7t5.com,http://localhost:4321"

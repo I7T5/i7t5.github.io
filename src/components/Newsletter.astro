@@ -23,6 +23,7 @@
       Subscribe
     </button>
   </form>
+  <p id="newsletter-status" class="text-sm mt-2 min-h-[1.25rem]" aria-live="polite"></p>
 </div>
 
 <style>
@@ -44,13 +45,44 @@
 </style>
 
 <script>
+  const ENDPOINT = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || 'http://localhost:8787';
+
   const toggle = document.getElementById('newsletter-toggle');
-  const form = document.getElementById('newsletter-form');
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const status = document.getElementById('newsletter-status');
+
   toggle?.addEventListener('click', () => {
     const expanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!expanded));
     form?.classList.toggle('is-open', !expanded);
     if (expanded) form?.setAttribute('inert', '');
     else form?.removeAttribute('inert');
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]') as HTMLInputElement;
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const email = input.value.trim();
+    if (!email) return;
+
+    input.disabled = true;
+    btn.disabled = true;
+    if (status) status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      if (status) status.textContent = 'Thanks! Check your inbox.';
+      input.value = '';
+    } catch {
+      if (status) status.textContent = 'Something went wrong. Try again?';
+      input.disabled = false;
+      btn.disabled = false;
+    }
   });
 </script>
