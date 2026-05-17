@@ -53,7 +53,13 @@ const processor = unified()
   .use(rewriteUrls)
   .use(rehypeStringify, { allowDangerousHtml: true });
 
-function wrap({ title, bodyHtml, postUrl }) {
+function wrap({ title, description, tags, bodyHtml, postUrl }) {
+  const descHtml = description
+    ? `<p class="description">${escape(description)}</p>`
+    : "";
+  const tagsHtml = tags?.length
+    ? `<p class="tags">${tags.map((t) => `#${escape(t)}`).join(" ")}</p>`
+    : "";
   return `<!doctype html>
 <html>
 <head>
