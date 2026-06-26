@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Cloudflare Worker
 worker/.dev.vars
 worker/.wrangler/
+
+# AI
+.claude/
