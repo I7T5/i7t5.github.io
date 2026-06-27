@@ -1,11 +1,9 @@
 ---
-import Bullets from "./Bullets.astro";
 import Tool from "../components/Tool.astro";
 
 const { software } = Astro.props;
 const dateString = software.data.createDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
 
-const onlyOneBullet = software.data.bullets.length === 1;
 const enableLink = software.data.enableLink;
 ---
 
@@ -16,5 +14,5 @@ const enableLink = software.data.enableLink;
   </div>
 
   <div class="text-gray-4 -mt-0.5 font-mono">{software.data.tools.map((tool: string) => <Tool tool={tool} />)}</div>
-  <Bullets bullets={software.data.bullets} onlyOneBullet={onlyOneBullet} />
+  <p class="text-sm text-gray-4 italic pt-0.5">{software.data.description}</p>
 </li>

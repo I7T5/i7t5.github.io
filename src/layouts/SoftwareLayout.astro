@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Repository from "../components/Repository.astro";
-import Bullets from "./Bullets.astro";
 
 const { frontmatter } = Astro.props;
 
@@ -16,7 +15,7 @@ const dateStr = frontmatter.createDate.toLocaleDateString(undefined, { year: 'nu
     <span class="text-secondary">{dateStr}</span>
     {frontmatter.repository ? <span class="text-secondary"> · </span><Repository url={frontmatter.repository} customText="repository" /> : null}
   </p>
-  <Bullets bullets={frontmatter.bullets} onlyOneBullet={frontmatter.bullets.length === 1} />
+  <p class="text-secondary italic">{frontmatter.description}</p>
   <slot />
   <hr>
 </article>

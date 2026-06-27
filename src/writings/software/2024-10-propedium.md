@@ -2,9 +2,7 @@
 name: "Propedium"
 createDate: 2024-10-09
 tools: ["Swift", "Xcode", "Git", "GitHub"]
-bullets: [
-  "Stores and manages SwiftUI countdowns and countdown widgets with SwiftData"
-]
+description: "Stores and manages SwiftUI countdowns and countdown widgets with SwiftData"
 repository: "https://github.com/I7T5/Propedium"
 enableLink: false
 ---

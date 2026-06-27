@@ -47,7 +47,7 @@ const software = defineCollection({
     authors: z.array(z.string()).optional(),
     createDate: z.date(),
     tools: z.array(z.string()),
-    bullets: z.array(z.string()),
+    description: z.string(),
     repository: z.string().url().optional(),
     enableLink: z.boolean()
   })
