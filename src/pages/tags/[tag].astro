@@ -1,26 +1,27 @@
 ---
 import { getCollection } from 'astro:content';
+import { COLLECTION } from '../../collections';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostItem from '../../layouts/PostItem.astro';
 import Title from '../../components/Title.astro';
-import WorkItem from '../../layouts/WorkItem.astro';
+import ResearchItem from '../../layouts/ResearchItem.astro';
 import HoverList from '../../components/HoverList.astro';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
-  const allWorks = await getCollection('works')
-  const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
-  const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
-  const uniqueTags = [...new Set(postTags.concat(workTags))];
+  const allPosts = await getCollection(COLLECTION.blog, ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
+  const allResearch = await getCollection(COLLECTION.research)
+  const postTags = allPosts.map((post: any) => post.data.tags).flat();
+  const researchTags = allResearch.map((research: any) => research.data.tags).flat();
+  const uniqueTags = [...new Set(postTags.concat(researchTags))];
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post: any) => post.data.tags.includes(tag));
-    const filteredWorks = allWorks.filter((work: any) => work.data.tags.includes(tag))
+    const filteredResearch = allResearch.filter((research: any) => research.data.tags.includes(tag))
     return {
       params: { tag },
       // props: { posts: filteredPosts },
       // props: { projects: filteredProjects },
-      props: { posts: filteredPosts, works: filteredWorks}
+      props: { posts: filteredPosts, research: filteredResearch}
     };
   });
 }
@@ -28,13 +29,13 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 // const { posts } = Astro.props;
 // const { projects } = Astro.props;
-const { posts, works } = Astro.props;
+const { posts, research } = Astro.props;
 
 ---
 <BaseLayout pageTitle={tag}>
   <Title>#{tag}</Title>
   <HoverList>
     {posts.map((post: any) => <PostItem post={post}/>)}
-    {works.map((work: any) => <WorkItem work={work}/>)}
+    {research.map((item: any) => <ResearchItem research={item}/>)}
   </HoverList>
 </BaseLayout>

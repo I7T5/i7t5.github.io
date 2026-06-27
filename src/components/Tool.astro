@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import { COLLECTION } from "../collections";
 const { tool } = Astro.props;
 const toolStr = tool.toLowerCase().replace(/ /g, "-");  // snake-case tools
 
-const allWorks = await getCollection("works")
-const tools = [...new Set(allWorks.map((work: any) => work.data.tools).flat())];
+const allResearch = await getCollection(COLLECTION.research)
+const tools = [...new Set(allResearch.map((research: any) => research.data.tools).flat())];
 // let url = (tools.includes(tool)) ? `/tool/${tool}` : "javascript:;"
 ---
 

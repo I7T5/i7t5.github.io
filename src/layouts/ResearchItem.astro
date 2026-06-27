@@ -1,0 +1,27 @@
+---
+import Bullets from "./Bullets.astro";
+import Tool from "../components/Tool.astro";
+import Tags from "../components/Tags.astro";
+
+const { research } = Astro.props;
+const startDate = research.data.startDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
+const hasEndDate = research.data.endDate.valueOf() !== 0
+const endDate = hasEndDate ? research.data.endDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : null;
+const dateString = hasEndDate ? (startDate === endDate ? startDate : `${startDate} – ${endDate}`) : `${startDate} – current`;
+
+const onlyOneBullet = research.data.bullets.length === 1;
+const enableLink = research.data.enableLink;
+---
+
+<li class="research-item py-2 px-3 rd-lg">
+  <div class="text-balance my-0">
+    { enableLink ?  <a class="hover:italic" href={`/research/${research.id}`}>{research.data.title}</a> : <span>{research.data.title}</span> }
+    <span class="text-gray-4"> · {dateString}</span>
+  </div>
+
+  <div class="text-gray-4 -mt-0.5 font-mono">{research.data.tools.map((tool: string) => <Tool tool={tool} />)}</div>
+  <Bullets bullets={research.data.bullets} onlyOneBullet={onlyOneBullet} />
+
+  <Tags tags={research.data.tags} includeSpacing={false} />
+  <!-- <div class="text-gray-3">{research.data.tags.map((tag: string) => <Tag tag={tag} />)}</div> -->
+</li>

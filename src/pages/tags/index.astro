@@ -1,15 +1,16 @@
 ---
 import { getCollection } from "astro:content";
+import { COLLECTION } from "../../collections";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/Tag.astro"
 import Title from "../../components/Title.astro";
 
-const allPosts = await getCollection('blog', ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
-const allWorks = await getCollection("works", ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
-const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
-const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
+const allPosts = await getCollection(COLLECTION.blog, ({ data }) => { return import.meta.env.PROD ? data.isDraft !== true : true; })
+const allResearch = await getCollection(COLLECTION.research, ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
+const postTags = allPosts.map((post: any) => post.data.tags).flat();
+const researchTags = allResearch.map((research: any) => research.data.tags).flat();
 
-const tags = [...new Set(postTags.concat(workTags))].filter(tag => tag !== 'research' && tag !== 'project').sort();
+const tags = [...new Set(postTags.concat(researchTags))].filter(tag => tag !== 'research' && tag !== 'project').sort();
 // TODO: sort by alphabetical order
 const pageTitle = "Tags"
 ---

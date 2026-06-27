@@ -1,14 +1,15 @@
 ---
 import { getCollection } from "astro:content";
+import { COLLECTION } from "../collections";
 
 const { tag } = Astro.props;
 const tagStr = tag.toLowerCase().replace(/ /g, "-");  // snake-case tags
 
-const allPosts = await getCollection("blog")
-const allWorks = await getCollection("works")
-const postTags = allPosts.map((post: any) => post.data.tags).flat(); 
-const workTags = allWorks.map((work: any) => work.data.tags).flat(); 
-const tags = [...new Set(postTags.concat(workTags))];
+const allPosts = await getCollection(COLLECTION.blog)
+const allResearch = await getCollection(COLLECTION.research)
+const postTags = allPosts.map((post: any) => post.data.tags).flat();
+const researchTags = allResearch.map((research: any) => research.data.tags).flat();
+const tags = [...new Set(postTags.concat(researchTags))];
 let url = (tags.includes(tag)) ? `/tags/${tag}` : "javascript:;"
 ---
 

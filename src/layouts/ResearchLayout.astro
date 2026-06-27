@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Repository from "../components/Repository.astro";
-import WorkBullets from "./WorkBullets.astro";
+import Bullets from "./Bullets.astro";
 import Tags from "../components/Tags.astro";
 
 const { frontmatter } = Astro.props;
 
-// Format work start and end dates
+// Format research start and end dates
 // NOTE: Show both startYear and endYear even if they are the same
 const startDate = frontmatter.startDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', });
 const endDate = frontmatter.endDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', });
@@ -21,7 +21,7 @@ const dateStr = frontmatter.endDate.valueOf() === 0 ? `${startDate} – current`
     {frontmatter.repository ? <span class="text-secondary"> · </span><Repository url={frontmatter.repository} customText="repository" /> : null}
   </p>
   <!-- QUESTION: Should I include tools in here too? -->
-  <WorkBullets bullets={frontmatter.bullets} onlyOneBullet={frontmatter.bullets.length === 1} />
+  <Bullets bullets={frontmatter.bullets} onlyOneBullet={frontmatter.bullets.length === 1} />
   <!-- <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} /> -->
   <slot />
 
