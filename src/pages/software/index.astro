@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import { COLLECTION } from "../../collections";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SoftwareItem from "../../layouts/SoftwareItem.astro";
+import Title from "../../components/Title.astro";
+import HoverList from "../../components/HoverList.astro";
+const allSoftware = await getCollection(COLLECTION.software);
+allSoftware.sort((a, b) => a.data.createDate > b.data.createDate ? -1 : 1)
+
+const pageTitle = "Software";
+---
+
+<BaseLayout>
+  <Title>{pageTitle}</Title>
+  <HoverList>
+    {allSoftware.map((software: any) => <SoftwareItem software={software}/>)}
+  </HoverList>
+</BaseLayout>
