@@ -1,0 +1,20 @@
+---
+import Bullets from "./Bullets.astro";
+import Tool from "../components/Tool.astro";
+
+const { software } = Astro.props;
+const dateString = software.data.createDate.toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
+
+const onlyOneBullet = software.data.bullets.length === 1;
+const enableLink = software.data.enableLink;
+---
+
+<li class="software-item py-2 px-3 rd-lg">
+  <div class="text-balance my-0">
+    { enableLink ?  <a class="hover:italic" href={`/software/${software.id}`}>{software.data.name}</a> : <span>{software.data.name}</span> }
+    <span class="text-gray-4"> · {dateString}</span>
+  </div>
+
+  <div class="text-gray-4 -mt-0.5 font-mono">{software.data.tools.map((tool: string) => <Tool tool={tool} />)}</div>
+  <Bullets bullets={software.data.bullets} onlyOneBullet={onlyOneBullet} />
+</li>

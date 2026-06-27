@@ -1,0 +1,23 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Repository from "../components/Repository.astro";
+import Bullets from "./Bullets.astro";
+
+const { frontmatter } = Astro.props;
+
+// Format the software creation date
+const dateStr = frontmatter.createDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', });
+---
+
+<BaseLayout pageTitle={frontmatter.name}>
+<article class="prose transition">
+  <h1 class="text-base font-semibold">{frontmatter.name}</h1>
+  <p>
+    <span class="text-secondary">{dateStr}</span>
+    {frontmatter.repository ? <span class="text-secondary"> · </span><Repository url={frontmatter.repository} customText="repository" /> : null}
+  </p>
+  <Bullets bullets={frontmatter.bullets} onlyOneBullet={frontmatter.bullets.length === 1} />
+  <slot />
+  <hr>
+</article>
+</BaseLayout>
