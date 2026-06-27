@@ -1,8 +1,6 @@
 ---
 title: "Propedium"
-affiliation: "Personal Project"
-startDate: 2024-10-01
-endDate: 2024-10-10
+createDate: 2024-10-09
 tools: ["Swift", "Xcode", "Git", "GitHub"]
 bullets: [
   "Stores and manages SwiftUI countdowns and countdown widgets with SwiftData"
