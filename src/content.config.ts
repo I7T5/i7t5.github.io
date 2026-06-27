@@ -4,9 +4,11 @@
 import { glob } from "astro/loaders";
 // Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
+// Collection names (single source of truth)
+import { COLLECTION } from "./collections";
 // Define a `loader` and `schema` for each collection
 const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/blog" }),
+  loader: glob({ pattern: '**/[^_]*.md', base: `./src/writings/${COLLECTION.blog}` }),
   schema: z.object({
     // all these are "data"
     title: z.string(),
@@ -22,8 +24,8 @@ const blog = defineCollection({
   })
 });
 
-const works = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/works" }),
+const research = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: `./src/writings/${COLLECTION.research}` }),
   schema: z.object({
     title: z.string(),
     authors: z.array(z.string()).optional(),
@@ -38,5 +40,22 @@ const works = defineCollection({
   })
 });
 
+const software = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: `./src/writings/${COLLECTION.software}` }),
+  schema: z.object({
+    name: z.string(),
+    authors: z.array(z.string()).optional(),
+    createDate: z.date(),
+    tools: z.array(z.string()),
+    bullets: z.array(z.string()),
+    repository: z.string().url().optional(),
+    enableLink: z.boolean()
+  })
+});
+
 // Export a single `collections` object to register your collection(s)
-export const collections = { blog, works };
+export const collections = {
+  [COLLECTION.blog]: blog,
+  [COLLECTION.research]: research,
+  [COLLECTION.software]: software,
+};
