@@ -44,6 +44,7 @@ const software = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: `./src/writings/${COLLECTION.software}` }),
   schema: z.object({
     name: z.string(),
+    slug: z.string().optional(),
     authors: z.array(z.string()).optional(),
     createDate: z.date(),
     tools: z.array(z.string()),

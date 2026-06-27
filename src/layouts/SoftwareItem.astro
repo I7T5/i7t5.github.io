@@ -9,7 +9,7 @@ const enableLink = software.data.enableLink;
 
 <li class="software-item py-2 px-3 rd-lg">
   <div class="text-balance my-0">
-    { enableLink ?  <a class="hover:italic" href={`/software/${software.id}`}>{software.data.name}</a> : <span>{software.data.name}</span> }
+    { enableLink ?  <a class="hover:italic" href={`/software/${software.data.slug ?? software.id}`}>{software.data.name}</a> : <span>{software.data.name}</span> }
     <span class="text-gray-4"> · {dateString}</span>
   </div>
 

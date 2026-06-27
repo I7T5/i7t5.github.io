@@ -6,7 +6,7 @@ import SoftwareLayout from '../../layouts/SoftwareLayout.astro';
 export async function getStaticPaths() {
   const software = await getCollection(COLLECTION.software, ({ data }) => { return import.meta.env.PROD ? data.enableLink === true : true; })
   return software.map(item => ({
-    params: { slug: item.id }, props: { item },
+    params: { slug: item.data.slug ?? item.id }, props: { item },
   }));
 }
 
