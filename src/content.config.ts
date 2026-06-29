@@ -13,6 +13,7 @@ const blog = defineCollection({
     // all these are "data"
     title: z.string(),
     pubDate: z.date(),
+    lastEditDate: z.date().optional(), 
     description: z.string(),
     author: z.string(),
     // image: z.object({
@@ -46,9 +47,9 @@ const software = defineCollection({
     name: z.string(),
     slug: z.string().optional(),
     authors: z.array(z.string()).optional(),
+    description: z.string(),
     createDate: z.date(),
     tools: z.array(z.string()),
-    description: z.string(),
     repository: z.string().url().optional(),
     enableLink: z.boolean()
   })
