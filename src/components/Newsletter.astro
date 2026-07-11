@@ -1,13 +1,12 @@
-<div class="mt-10">
+<span>
   <button
     id="newsletter-toggle"
     type="button"
-    class="hover:text-black text-gray-4 border-b-1.5 transition mr-1"
+    class="hover:text-red text-gray-4 border-b-1.5 transition mr-1"
     aria-expanded="false"
     aria-controls="newsletter-form"
   >
-    <span class="i-lucide-chevron-right chevron transition-transform duration-300 ease-out"></span>
-    Sign up for my newsletter / Receive emails for my blog posts!
+    Newsletter
   </button>
   <form id="newsletter-form" class="flex items-center gap-2" inert>
     <input
@@ -24,11 +23,15 @@
     </button>
   </form>
   <p id="newsletter-status" class="text-sm mt-2 min-h-[1.25rem]" aria-live="polite"></p>
-</div>
+</span>
 
 <style>
-  #newsletter-toggle[aria-expanded="true"] .chevron {
-    transform: rotate(90deg);
+  #newsletter-toggle {
+    max-height: 1.4em;
+    /*
+      TODO: <button> padding does not match <a> 
+      https://stackoverflow.com/questions/8100127/getting-an-input-button-and-an-a-to-equal-size-in-html
+    */
   }
   #newsletter-form {
     max-height: 0;
