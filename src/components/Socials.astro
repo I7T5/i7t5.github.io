@@ -1,7 +1,3 @@
----
-import Newsletter from "./Newsletter.astro";
----
-
 <div class="text-gray-4 mt-2">
   <a class="hover:text-purple border-b-1.5 transition mr-1" href="/assets/resume-cv.pdf">CV/RESUMÉ</a>
   <a class="hover:text-blue-500 border-b-1.5 transition mr-1" href="https://www.linkedin.com/in/yina-Tang/">LinkedIn</a>
@@ -9,7 +5,103 @@ import Newsletter from "./Newsletter.astro";
   <a class="hover:text-amber border-b-1.5 transition mr-1" href="https://www.goodreads.com/user/show/163078389-ina-tang">Goodreads</a>
 
 </div>
+
+<!-- Contact -->
 <div class="text-gray-4 mt-3">
+    <button
+    id="newsletter-toggle"
+    type="button"
+    class="hover:text-purple text-gray-4 border-b-1.5 transition mr-1"
+    aria-expanded="false"
+    aria-controls="newsletter-form"
+  >
+    Newsletter
+  </button>
+
   <a class="hover:text-red border-b-1.5 transition mr-1" href="mailto:hello@i7t5.com">Email</a>
-  <Newsletter />
 </div>
+
+<!-- Newletter form -->
+<div>
+  <form id="newsletter-form" class="flex items-center gap-2" inert>
+    <input
+      type="email"
+      required
+      placeholder="friend@email.com"
+      class="border-0 border-b-1.5 border-gray-3 bg-transparent outline-none focus:border-blue px-1 py-0.5 flex-1"
+    />
+    <button
+      type="submit"
+      class="border-0 bg-transparent hover:text-red text-gray-4 transition px-2 py-0.5 disabled:opacity-50"
+    >
+      Subscribe
+    </button>
+  </form>
+  <p id="newsletter-status" class="text-sm mt-2 min-h-[1.25rem]" aria-live="polite"></p>
+</div>
+
+<style>
+  #newsletter-toggle {
+    max-height: 1.4em;
+    /*
+      TODO: <button> padding does not match <a> 
+      https://stackoverflow.com/questions/8100127/getting-an-input-button-and-an-a-to-equal-size-in-html
+    */
+  }
+  #newsletter-form {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-out, opacity 300ms ease-out, margin-top 300ms ease-out;
+  }
+  #newsletter-form.is-open {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  // Newsletter
+  const ENDPOINT = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || 'http://localhost:8787';
+
+  const toggle = document.getElementById('newsletter-toggle');
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const status = document.getElementById('newsletter-status');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    form?.classList.toggle('is-open', !expanded);
+    if (expanded) form?.setAttribute('inert', '');
+    else form?.removeAttribute('inert');
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]') as HTMLInputElement;
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const email = input.value.trim();
+    if (!email) return;
+
+    input.disabled = true;
+    btn.disabled = true;
+    if (status) status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      if (status) status.textContent = 'Thanks! Check your inbox.';
+      input.value = '';
+    } catch {
+      if (status) status.textContent = 'Something went wrong. Try again?';
+      input.disabled = false;
+      btn.disabled = false;
+    }
+  });
+</script>
